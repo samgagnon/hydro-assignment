@@ -21,6 +21,8 @@ This script solves the advection-diffusion equation using the Lax-Friedrich meth
 
 This script solves for the motion of a 1D fluid using the donor cell advection scheme with reflective boundary conditions. The conservative form of the hydro equations are used.
 
+When the amplitude of the perturbation is increased, the main perturbation decays in amplitude quickly and the energy goes into activating lower modes in the fluid. Shock appears in the trail of the main wave. The width of the shock is set by the kinetic energy in the wave.
+
 ### hydro_bonus.py
 
 The script expands on the script from ```hydro.py``` to now also
