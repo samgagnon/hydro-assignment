@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 # steps up the grid and flow parameters
 n = 100
+length = 100
 f_0 = np.linspace(0, 1, length)
 f_1 = np.copy(f_0)
 f_2 = np.copy(f_0)
@@ -24,7 +25,9 @@ step = u * dt / (2 * dx)
 plt.ion()
 fig, axes = plt.subplots(1, 2)
 axes[0].plot(x, f_0, 'k-')
-axes[1].plot(x, f_2, 'k-')
+axes[1].plot(x, f_0, 'k-')
+axes[0].set_title("FTCS", fontsize=15)
+axes[1].set_title("Lax-Friedrich", fontsize=15)
 plt1, = axes[0].plot(x, f_1, '.r')
 plt2, = axes[1].plot(x, f_2, '.r')
 fig.canvas.draw()
