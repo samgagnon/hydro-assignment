@@ -21,9 +21,9 @@ x = np.arange(n) * dx
 J1 = np.zeros(n)
 J2 = np.zeros(n)
 
-A = 0.2
-f1 = 1.0 + A * np.exp(-(x - 100) ** 2 / 40)
-f2 = A * np.exp(-(x - 100) ** 2 / 40)
+A = 0.4
+f1 = 1.0 + A * np.exp(-(x - 100) ** 2 / 100)
+f2 = A * np.exp(-(x - 100) ** 2 / 100)
 
 # plotting
 plt.ion()
