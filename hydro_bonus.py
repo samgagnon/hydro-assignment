@@ -44,14 +44,15 @@ while i < nsteps:
         else:
             J1[i] = f1[i + 1] * u[i]
             J2[i] = f2[i + 1] * u[i]
-    # solve first equation
+
+    # solve continuity equation
     f1[1:-1] = f1[1:-1] - (dt / dx) * (J1[1:-1] - J1[:-2])
-    # enforce boundary conditions
+    # solve boundaries
     f1[0] = f1[0] - (dt / dx) * J1[0]
     f1[-1] = f1[-1] + (dt / dx) * J1[-2]
-    # solve second equation
+    # solve Euler equation
     f2[1:-1] = f2[1:-1] - (dt / dx) * (J2[1:-1] - J2[:-2])
-    # enforce boundary conditions
+    # solve boundaries
     f2[0] = f2[0] - (dt / dx) * J2[0]
     f2[-1] = f2[-1] + (dt / dx) * J2[-2]
 
@@ -60,8 +61,10 @@ while i < nsteps:
     f2[0] = f2[0] - 0.5 * c_s**2 * (f1[1] - f1[0]) / dx
     f2[-1] = f2[-1] - 0.5 * c_s**2 * (f1[-1] - f1[-2]) / dx
     f2[-1] = f2[-1] - 0.5 * c_s**2 * (f1[-1] - f1[-2]) / dx
+
     # update the plot
     plt1.set_ydata(f1)
     fig.canvas.draw()
     plt.pause(0.001)
+
     i += 1
