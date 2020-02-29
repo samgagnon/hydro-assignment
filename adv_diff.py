@@ -8,7 +8,7 @@ Advection-Diffusion Equation
 import numpy as np
 import matplotlib.pyplot as plt
 
-nsteps = 1000  # number of steps
+nsteps = 5000  # number of steps
 
 # initialize parameters
 n = 100
@@ -19,8 +19,8 @@ F1 = np.linspace(0, 1, 100)
 F2 = np.copy(F1)
 F1[0] = 0.0
 F2[0] = 0.0
-D1 = 1.0
-D2 = 10
+D1 = 0.1
+D2 = 1
 u = -0.01
 
 # group useful constants
@@ -32,8 +32,8 @@ beta2 = D2 * dt / dx **2
 # plotting
 plt.ion()
 fig, axes = plt.subplots(1, 2)
-axes[0].set_title("D=1", fontsize=15)
-axes[1].set_title("D=10", fontsize=15)
+axes[0].set_title("D=0.1", fontsize=15)
+axes[1].set_title("D=1.0", fontsize=15)
 plt1, = axes[0].plot(x, F1, 'ro')
 plt2, = axes[1].plot(x, F2, 'ro')
 fig.canvas.draw()
@@ -46,7 +46,8 @@ while i < nsteps:
     # enforce boundary conditions
     A1[0][0] = 1.0
     A1[0][1] = 0.0
-    A1[-1][-1] = 1.0 + beta1
+    A1[-1][-1] = 1.0
+    A1[-1][-2] = 0
     # Lax-Friedrich advection
     F1[1:n - 1] = 0.5 * (F1[:n - 2] + F1[2:]) - 0.5 * alpha * (-F1[:n - 2] + F1[2:])
     
@@ -58,14 +59,16 @@ while i < nsteps:
     # enforce boundary conditions
     A2[0][0] = 1.0
     A2[0][1] = 0.0
-    A2[-1][-1] = 1.0 + beta2
+    A2[-1][-1] = 1.0
+    A2[-1][-2] = 0.0
     # solve for F2
     F2 = np.linalg.solve(A2, F2)
     
     F2[1:n - 1] = 0.5 * (F2[:n - 2] + F2[2:]) - 0.5 * alpha * (-F2[:n - 2] + F2[2:])
     # update the plot
-    plt1.set_ydata(F1)
-    plt2.set_ydata(F2)
-    fig.canvas.draw()
-    plt.pause(0.001)
+    if i % 100 is 0:
+        plt1.set_ydata(F1)
+        plt2.set_ydata(F2)
+        fig.canvas.draw()
+        plt.pause(0.001)
     i += 1
