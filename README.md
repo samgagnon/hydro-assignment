@@ -1,6 +1,8 @@
 # PHYS 432 Problem Set 4
 
-A collection of simple simulations for PHYS 432 (Physics of Fluids) at McGill University.
+A collection of simple simulations for PHYS 432 (Physics of Fluids) at McGill University. I am submitting ```advection.py``` and ```adv_diff.py``` to be graded.
+
+Collaborator: Thomas St-Denis
 
 ## Prerequisites
 This code runs on Python 3.6 or more recent versions and requires the ```numpy``` and ```matplotlib``` packages.
